@@ -22,5 +22,5 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(['middleware' => 'auth'], function () {
 
   Route::get('dashboard', 'DashboardController@index');
-
+  Route::resource('user_profile', 'ProfileController');
   });

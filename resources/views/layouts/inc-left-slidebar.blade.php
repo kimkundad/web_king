@@ -13,14 +13,14 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href="dashboard.html">
+                <li {{ (Request::is('dashboard*') ? 'class=active' : '') }} >
+                    <a href="{{url('dashboard')}}">
                         <i class="ti-panel"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a href="user.html">
+                <li {{ (Request::is('user_profile*') ? 'class=active' : '') }}>
+                    <a href="{{url('user_profile')}}">
                         <i class="ti-user"></i>
                         <p>User Profile</p>
                     </a>
