@@ -76,15 +76,13 @@
 
                               <div class="form-group">
                                                       <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                          <div id="upload-demo" style="max-width: 280px;"></div>
+                                                          <div id="upload-demo" style="max-width: 270px;"></div>
                                                           <form enctype="multipart/form-data">
                                                           <div>
                                                             <br>
                                                               <span class=" btn-file">
 
-
-                                                                  <input type="hidden" name="id" class="form-control" value="{{Auth::user()->id}}" />
-                                                                  <input type="file" id="upload" name="image" accept="image/*" > </span>
+                                                                  <input type="file" id="upload" name="image" accept="image/*" style="width: 200px;"> </span>
 
                                                           </div>
                                                            </form>
@@ -227,8 +225,8 @@ $uploadCrop = $('#upload-demo').croppie({
         type: 'circle'
     },
     boundary: {
-        width: 280,
-        height: 280
+        width: 270,
+        height: 270
     }
 });
 
