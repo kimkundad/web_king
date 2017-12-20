@@ -25,6 +25,7 @@ class ProfileController extends Controller
             ->where('users.id', Auth::user()->id)
             ->first();
         $data['header'] = "User Profile";
+        $data['method'] = "put";
         $data['user'] = $user;
         return view('user_profile', $data);
     }
@@ -90,7 +91,9 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
+
     }
 
     /**
@@ -102,7 +105,28 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+      'company' => 'required',
+      'name' => 'required',
+      'email' => 'required|email|max:255|exists:users',
+      'phone' => 'required',
+      'first_name' => 'required',
+      'last_name' => 'required',
+      'address' => 'required'
+      ]);
+
+      $package = User::find($id);
+      $package->name = $request['name'];
+      $package->first_name = $request['first_name'];
+      $package->last_name = $request['last_name'];
+      $package->phone = $request['phone'];
+      $package->address = $request['address'];
+      $package->bio = $request['bio'];
+      $package->company = $request['company'];
+      $package->email = $request['email'];
+      $package->save();
+
+      return redirect(url('user_profile'))->with('success_user','แก้ไขบทความสำเร็จแล้วค่ะ');
     }
 
     /**

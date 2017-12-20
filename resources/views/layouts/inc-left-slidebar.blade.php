@@ -25,7 +25,8 @@
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li>
+
+          <!--      <li>
                     <a href="table.html">
                         <i class="ti-view-list-alt"></i>
                         <p>Table List</p>
@@ -55,6 +56,7 @@
                         <p>Notifications</p>
                     </a>
                 </li>
+              -->
 				<li class="active-pro">
                     <a href="{{url('logout')}}">
                         <i class="ti-export" style="font-size: 20px;"></i>

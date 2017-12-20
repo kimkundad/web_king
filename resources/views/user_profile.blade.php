@@ -133,63 +133,108 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form>
+
+                              <div class="alert alert-warning">
+                                    <button type="button" aria-hidden="true" class="close">×</button>
+                                    <span><b> แจ้งเตือน - </b> กรุณา กรอกข้อมูลให้ครบถ้วนตามเครื่องหมาย ( * ) ที่ระบุไว้</span>
+                                </div>
+
+
+                              <form  method="POST" action="{{ url('user_profile/'.Auth::user()->id) }}">
+                                            {{ method_field($method) }}
+                                            {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label>Company</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company" value="{{Auth::user()->company}}">
+                                            <div class="form-group{{ $errors->has('company') ? ' has-error' : '' }}">
+                                                <label>Company*</label>
+                                                <input type="hidden" name="id" class="form-control" value="{{Auth::user()->id}}" />
+                                                <input type="text" class="form-control border-input" name="company" placeholder="Company" value="{{ old( 'company', Auth::user()->company) }}">
+                                                @if ($errors->has('company'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ชื่อบริษัท</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input type="text" class="form-control border-input" placeholder="Username" value="{{Auth::user()->name}}">
+                                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                                <label>Username*</label>
+                                                <input type="text" class="form-control border-input" name="name" placeholder="Username" value="{{ old( 'name', Auth::user()->name) }}">
+                                                @if ($errors->has('name'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ชื่อเล่นของคุณ</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control border-input" placeholder="Email" value="{{Auth::user()->email}}">
+                                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                                <label for="exampleInputEmail1">Email address*</label>
+                                                <input type="email" class="form-control border-input" name="email" placeholder="Email" value="{{ old( 'email', Auth::user()->email) }}">
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ email ของคุณด้วย</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company" value="{{Auth::user()->first_name}}">
+                                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                                <label>First Name*</label>
+                                                <input type="text" class="form-control border-input" name="first_name" placeholder="First Name" value="{{ old( 'first_name', Auth::user()->first_name) }}">
+                                                @if ($errors->has('first_name'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ ชื่อจริง ของคุณด้วย</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="{{Auth::user()->last_name}}">
+                                            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                                                <label>Last Name*</label>
+                                                <input type="text" class="form-control border-input" name="last_name" placeholder="Last Name" value="{{ old( 'last_name', Auth::user()->last_name) }}">
+                                                @if ($errors->has('last_name'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ นามสกุล ของคุณด้วย</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control border-input" placeholder="Home Address" value="{{Auth::user()->address}}">
+                                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                                <label>Address*</label>
+                                                <input type="text" class="form-control border-input" name="address" placeholder="Home Address" value="{{ old( 'address', Auth::user()->address) }}">
+                                                @if ($errors->has('address'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ ที่อยู่ ของคุณด้วย</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone number</label>
-                                                <input type="text" class="form-control border-input" value="{{Auth::user()->phone}}">
+                                            <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                                <label>Phone number*</label>
+                                                <input type="text" class="form-control border-input" name="phone" value="{{ old( 'phone', Auth::user()->phone) }}">
+                                                @if ($errors->has('phone'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ เบอร์โทร ของคุณด้วย</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Provider</label>
-                                                <input type="text" class="form-control border-input" placeholder="Country" value="{{Auth::user()->provider}}">
+                                                <input type="text" class="form-control border-input" disabled value="{{Auth::user()->provider}}">
                                             </div>
                                         </div>
 
@@ -199,13 +244,15 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>About Me</label>
-                                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">{{Auth::user()->bio}}</textarea>
+                                                <textarea rows="5" class="form-control border-input" name="bio" placeholder="Here can be your description" value="Mike">{{ old( 'bio', Auth::user()->bio) }}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
                                     </div>
+
+
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
@@ -310,4 +357,25 @@ $('.upload-result').on('click', function (ev) {
 });
 
 </script>
+
+@if ($message = Session::get('success_user'))
+<script type="text/javascript">
+type = ['success'];
+color = Math.floor((Math.random() * 4) + 1);
+$.notify({
+    icon: "ti-gift",
+    message: "ยินดีด้วย ได้ทำการเปลี่ยนรุป <b>User Profile</b> สำเร็จเรียบร้อยแล้วค่ะ"
+
+  },{
+      type: type[color],
+      timer: 2000,
+      placement: {
+          from: 'top',
+          align: 'right'
+      }
+  });
+</script>
+@endif
+
+
 @stop('scripts')
