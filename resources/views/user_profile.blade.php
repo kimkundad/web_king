@@ -1,5 +1,7 @@
 @extends('layouts.template')
 @section('stylesheet')
+<link href="{{url('assets/croppie/croppie.css')}}" rel="stylesheet" type="text/css">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @stop('stylesheet')
 
 @section('content')
@@ -11,6 +13,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-md-5">
+
+
                         <div class="card card-user">
                             <div class="image">
                                 <img src="assets/img/background.jpg" alt="...">
@@ -49,69 +53,56 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+                        @if($user->provider == 'email')
+                        <style>
+                        .croppie-container {
+                            padding: 0px;
+                        }
+
+                        </style>
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Team Members</h4>
+                                <h4 class="title">Change Avatar</h4>
                             </div>
-                            <div class="content">
-                                <ul class="list-unstyled team-members">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        DJ Khaled
-                                                        <br>
-                                                        <span class="text-muted"><small>Offline</small></span>
-                                                    </div>
+                            <div class="content" style="padding: 15px 15px 10px 10px;">
 
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Creative Tim
-                                                        <br>
-                                                        <span class="text-success"><small>Available</small></span>
-                                                    </div>
 
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Flume
-                                                        <br>
-                                                        <span class="text-danger"><small>Busy</small></span>
-                                                    </div>
+                              <div class="form-group">
+                                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                          <div id="upload-demo" style="max-width: 280px;"></div>
+                                                          <form enctype="multipart/form-data">
+                                                          <div>
+                                                            <br>
+                                                              <span class=" btn-file">
 
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                                          
+                                                                  <input type="hidden" name="id" class="form-control" value="{{Auth::user()->id}}" />
+                                                                  <input type="file" id="upload" name="image" accept="image/*" > </span>
+
+                                                          </div>
+                                                           </form>
+                                                      </div>
+
+                                                  </div>
+                                                  <div class="text-center">
+                                                      <button type="submit" class="upload-result btn btn-info btn-fill btn-wd">Update Avatar</button>
+                                                  </div>
+                                                  <div class="clearfix"></div>
+
                             </div>
                         </div>
+                        @endif
+
+
+
+
                     </div>
                     <div class="col-lg-8 col-md-7">
                         <div class="card">
@@ -217,4 +208,68 @@
 @stop
 
 @section('scripts')
+<script src="{{url('assets/croppie/croppie.js')}}" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+
+$.ajaxSetup({
+headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+
+$uploadCrop = $('#upload-demo').croppie({
+    enableExif: true,
+    viewport: {
+        width: 250,
+        height: 250,
+        type: 'circle'
+    },
+    boundary: {
+        width: 300,
+        height: 300
+    }
+});
+
+$('#upload').on('change', function () {
+
+	var reader = new FileReader();
+    reader.onload = function (e) {
+    	$uploadCrop.croppie('bind', {
+    		url: e.target.result
+    	}).then(function(){
+    		console.log('jQuery bind complete');
+    	});
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+
+
+
+
+$('.upload-result').on('click', function (ev) {
+
+	$uploadCrop.croppie('result', {
+		type: 'canvas',
+		size: 'viewport'
+	}).then(function (resp) {
+		$.ajax({
+			url: "{{url('image-crop')}}",
+			type: "POST",
+			data: {"image":resp},
+			success: function (data) {
+				swal("Success!", "Change avatar image success!", "success");
+
+        var delayMillis = 3000;
+
+        setTimeout(function() {
+          window.location = "{{url('user_profile')}}";
+        }, delayMillis);
+			}
+		});
+	});
+});
+
+</script>
 @stop('scripts')
