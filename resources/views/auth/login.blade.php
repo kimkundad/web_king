@@ -1,12 +1,13 @@
 @extends('layouts.template-login')
 @section('content')
 
+
 <?php
-    if(Auth::check()){
-      return Redirect::to('dashboard');
-    }else{
-      return view('auth.login');
-    }
+if(Auth::check()){
+  return Redirect::to('dashboard');
+}else{
+
+}
  ?>
 
 <section class="body-sign body-locked">
