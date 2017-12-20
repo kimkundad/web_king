@@ -26,7 +26,7 @@ class SocialAccountService
 
             $user = User::whereEmail($providerUser->getEmail())->first();
 
-            dd($providerUser);
+          //  dd($providerUser);
             if (!$user) {
 
 
