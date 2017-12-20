@@ -82,7 +82,7 @@
                                                             <br>
                                                               <span class=" btn-file">
 
-                                                          
+
                                                                   <input type="hidden" name="id" class="form-control" value="{{Auth::user()->id}}" />
                                                                   <input type="file" id="upload" name="image" accept="image/*" > </span>
 
@@ -257,7 +257,7 @@ $('.upload-result').on('click', function (ev) {
 		$.ajax({
 			url: "{{url('image-crop')}}",
 			type: "POST",
-			data: {"image":resp},
+			data: {"image":resp, "user_id":{{Auth::user()->id}} },
 			success: function (data) {
 				swal("Success!", "Change avatar image success!", "success");
 

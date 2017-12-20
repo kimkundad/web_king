@@ -11,8 +11,16 @@
 |
 */
 
+Route::auth();
+
 Route::get('/', function () {
-    return view('auth.login');
+
+    if(Auth::check()){
+      return Redirect::to('dashboard');
+    }else{
+      return view('auth.login');
+    }
+
 });
 
 Auth::routes();
