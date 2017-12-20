@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'facebook' => [
+    'client_id' => '169028993844806',
+    'client_secret' => '807385b19edce9b2f64b01062015327e',
+    'redirect' => 'https://www.linchak.com/callback',
+    ],
 
 ];

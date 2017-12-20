@@ -7,11 +7,11 @@
                 <span class="icon-bar bar2"></span>
                 <span class="icon-bar bar3"></span>
             </button>
-            <a class="navbar-brand" href="#">Dashboard</a>
+            <a class="navbar-brand" href="#">{{$header}}</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              
+
                 <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="ti-bell"></i>

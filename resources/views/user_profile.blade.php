@@ -17,15 +17,21 @@
                             </div>
                             <div class="content">
                                 <div class="author">
-                                  <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="...">
+
+
+                                  @if($user->provider == 'email')
+                                  <img class="avatar border-white" src="assets/img/avatar/{{$user->avatar}}" alt="{{Auth::user()->name}}">
+                                  @else
+                                  <img class="avatar border-white" src="//{{$user->avatar}}" alt="{{Auth::user()->name}}">
+                                  @endif
+
+
                                   <h4 class="title">{{Auth::user()->name}}<br>
-                                     <a href="#"><small>@chetfaker</small></a>
+                                     <a href="#"><small>@ {{Auth::user()->name}}</small></a>
                                   </h4>
                                 </div>
                                 <p class="description text-center">
-                                    "I like the way you work it <br>
-                                    No diggity <br>
-                                    I wanna bag it up"
+                                    "{{Auth::user()->bio}}"
                                 </p>
                             </div>
                             <hr>
@@ -118,19 +124,19 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Company</label>
-                                                <input type="text" class="form-control border-input" disabled="" placeholder="Company" value="Creative Code Inc.">
+                                                <input type="text" class="form-control border-input" placeholder="Company" value="{{Auth::user()->company}}">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" class="form-control border-input" placeholder="Username" value="michael23">
+                                                <input type="text" class="form-control border-input" placeholder="Username" value="{{Auth::user()->name}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control border-input" placeholder="Email">
+                                                <input type="email" class="form-control border-input" placeholder="Email" value="{{Auth::user()->email}}">
                                             </div>
                                         </div>
                                     </div>
@@ -139,13 +145,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company" value="Chet">
+                                                <input type="text" class="form-control border-input" placeholder="Company" value="{{Auth::user()->first_name}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="Faker">
+                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="{{Auth::user()->last_name}}">
                                             </div>
                                         </div>
                                     </div>
@@ -154,40 +160,32 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input type="text" class="form-control border-input" placeholder="Home Address" value="Melbourne, Australia">
+                                                <input type="text" class="form-control border-input" placeholder="Home Address" value="{{Auth::user()->address}}">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control border-input" placeholder="City" value="Melbourne">
+                                                <label>Phone number</label>
+                                                <input type="text" class="form-control border-input" value="{{Auth::user()->phone}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Country</label>
-                                                <input type="text" class="form-control border-input" placeholder="Country" value="Australia">
+                                                <label>Provider</label>
+                                                <input type="text" class="form-control border-input" placeholder="Country" value="{{Auth::user()->provider}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Postal Code</label>
-                                                <input type="number" class="form-control border-input" placeholder="ZIP Code">
-                                            </div>
-                                        </div>
+
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>About Me</label>
-                                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">Oh so, your weak rhyme
-You doubt I'll bother, reading into it
-I'll probably won't, left to my own devices
-But that's the difference in our opinions.</textarea>
+                                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">{{Auth::user()->bio}}</textarea>
                                             </div>
                                         </div>
                                     </div>

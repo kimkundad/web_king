@@ -22,7 +22,7 @@ class ProfileController extends Controller
             )
             ->where('users.id', Auth::user()->id)
             ->first();
-
+        $data['header'] = "User Profile";
         $data['user'] = $user;
         return view('user_profile', $data);
     }

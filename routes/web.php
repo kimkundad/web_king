@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/redirect', 'FacebookAuthController@redirect');
+Route::get('/callback', 'FacebookAuthController@callback');
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::group(['middleware' => 'auth'], function () {

@@ -83,6 +83,11 @@
               								<span>or</span>
               							</span>
 
+                            <div class="mb-xs text-center">
+              								<a class="btn btn-facebook mb-md ml-xs mr-xs" href="{{url('/redirect')}}">Connect with <i class="fa fa-facebook"></i></a>
+
+              							</div>
+
                             <p class="text-center" style="color:#777;">Don't have an account yet? <a style="color:#ec3781;" href="{{url('register')}}">Sign Up!</a></p>
 
 

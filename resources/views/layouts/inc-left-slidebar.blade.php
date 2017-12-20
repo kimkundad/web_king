@@ -56,9 +56,9 @@
                     </a>
                 </li>
 				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="ti-export"></i>
-                        <p>Upgrade to PRO</p>
+                    <a href="{{url('logout')}}">
+                        <i class="ti-export" style="font-size: 20px;"></i>
+                        <p>Sign Out</p>
                     </a>
                 </li>
             </ul>
