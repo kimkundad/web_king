@@ -26,13 +26,14 @@ class SocialAccountService
 
             $user = User::whereEmail($providerUser->getEmail())->first();
 
+            dd($providerUser);
             if (!$user) {
 
 
 
               if($providerUser->getEmail() != NULL){
 
-                dd($providerUser);
+
 
                           $user = User::create([
                               'email' => $providerUser->getEmail(),
