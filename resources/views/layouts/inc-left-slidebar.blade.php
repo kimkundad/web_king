@@ -7,8 +7,8 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="#" class="simple-text">
+                    Linchak.com
                 </a>
             </div>
 
