@@ -65,6 +65,22 @@
                         .croppie-container {
                             padding: 0px;
                         }
+                        @media (min-width: 1200px)
+                        {
+                          .avatar-up{
+                            max-width: 300px;
+                          }
+
+                        }
+                        @media (min-width: 992px)
+                        {
+                          .avatar-up{
+                            max-width: 300px;
+                          }
+
+                        }
+
+
 
                         </style>
                         <div class="card">
@@ -76,7 +92,7 @@
 
                               <div class="form-group">
                                                       <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                          <div id="upload-demo" style="max-width: 270px;"></div>
+                                                          <div id="upload-demo" class="avatar-up"></div>
                                                           <form enctype="multipart/form-data">
                                                           <div>
                                                             <br>
