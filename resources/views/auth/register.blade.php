@@ -115,7 +115,7 @@
               								<span>or</span>
               							</span>
 
-                            <p class="text-center" style="color:#777;">If you have an account yet? <a style="color:#ec3781;" href="{{url('login')}}">Sign is!</a></p>
+                            <p class="text-center" style="color:#777;">If you have an account yet? <a style="color:#ec3781;" href="{{url('login')}}">Sign in!</a></p>
 
 
 

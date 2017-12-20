@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -13,7 +16,15 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('user_profile');
+      $user = DB::table('users')
+            ->select(
+            'users.*'
+            )
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+        $data['user'] = $user;
+        return view('user_profile', $data);
     }
 
     /**

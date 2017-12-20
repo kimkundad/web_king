@@ -62,11 +62,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      $ran = array("1483537975.png","1483556517.png","1483556686.png");
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'is_admin' => false,
+            'provider' => 'email',
+            'avatar' => $ran[array_rand($ran, 1)]
         ]);
     }
 }

@@ -18,7 +18,7 @@
                             <div class="content">
                                 <div class="author">
                                   <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="...">
-                                  <h4 class="title">Chet Faker<br>
+                                  <h4 class="title">{{Auth::user()->name}}<br>
                                      <a href="#"><small>@chetfaker</small></a>
                                   </h4>
                                 </div>
