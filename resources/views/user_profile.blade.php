@@ -71,7 +71,7 @@
                             <div class="header">
                                 <h4 class="title">Change Avatar</h4>
                             </div>
-                            <div class="content" style="padding: 15px 15px 10px 10px;">
+                            <div class="content" >
 
 
                               <div class="form-group">
@@ -227,8 +227,8 @@ $uploadCrop = $('#upload-demo').croppie({
         type: 'circle'
     },
     boundary: {
-        width: 300,
-        height: 300
+        width: 280,
+        height: 280
     }
 });
 
