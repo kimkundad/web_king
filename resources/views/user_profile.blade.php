@@ -2,6 +2,15 @@
 @section('stylesheet')
 <link href="{{url('assets/croppie/croppie.css')}}" rel="stylesheet" type="text/css">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+.card-user .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 15px;
+}
+</style>
 @stop('stylesheet')
 
 @section('content')
@@ -223,6 +232,7 @@
 
 @section('scripts')
 <script src="{{url('assets/croppie/croppie.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/js/bootstrap-notify.js')}}"></script>
 
 <script type="text/javascript">
 
@@ -269,11 +279,25 @@ $('.upload-result').on('click', function (ev) {
 		size: 'viewport'
 	}).then(function (resp) {
 		$.ajax({
-			url: "{{url('image-crop')}}",
+			url: "{{url('update_pic')}}",
 			type: "POST",
-			data: {"image":resp, "user_id":{{Auth::user()->id}} },
+			data: {"image":resp},
 			success: function (data) {
-				swal("Success!", "Change avatar image success!", "success");
+        type = ['success'];
+        color = Math.floor((Math.random() * 4) + 1);
+        $.notify({
+          	icon: "ti-gift",
+          	message: "ยินดีด้วย ได้ทำการเปลี่ยนรุป <b>User Profile</b> สำเร็จเรียบร้อยแล้วค่ะ"
+
+          },{
+              type: type[color],
+              timer: 2000,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+          });
+
 
         var delayMillis = 3000;
 

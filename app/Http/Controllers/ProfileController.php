@@ -6,6 +6,8 @@ use Auth;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Hash;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileController extends Controller
 {
@@ -25,6 +27,27 @@ class ProfileController extends Controller
         $data['header'] = "User Profile";
         $data['user'] = $user;
         return view('user_profile', $data);
+    }
+
+    public function update_pic(Request $request)
+    {
+        $data = $request->image;
+
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+
+        $data = base64_decode($data);
+        $image_name= time().'.png';
+        $path = public_path() . "/assets/img/avatar/" . $image_name;
+        file_put_contents($path, $data);
+
+        $id = Auth::user()->id;
+
+        $package = User::find($id);
+        $package->avatar = $image_name;
+        $package->save();
+
+        return response()->json(['success'=>'done']);
     }
 
     /**

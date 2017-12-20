@@ -35,4 +35,5 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('dashboard', 'DashboardController@index');
   Route::resource('user_profile', 'ProfileController');
+  Route::post('update_pic', 'ProfileController@update_pic');
   });
