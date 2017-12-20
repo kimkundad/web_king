@@ -71,12 +71,12 @@
                             <div class="header">
                                 <h4 class="title">Change Avatar</h4>
                             </div>
-                            <div class="content" >
+                            <div class="content" style="padding: 15px 15px 10px 10px;">
 
 
                               <div class="form-group">
                                                       <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                          <div id="upload-demo" style="max-width: 280px;"></div>
+                                                          <div id="upload-demo" style="max-width: 270px;"></div>
                                                           <form enctype="multipart/form-data">
                                                           <div>
                                                             <br>
@@ -222,8 +222,8 @@ headers: {
 $uploadCrop = $('#upload-demo').croppie({
     enableExif: true,
     viewport: {
-        width: 250,
-        height: 250,
+        width: 240,
+        height: 240,
         type: 'circle'
     },
     boundary: {
