@@ -37,7 +37,7 @@ return [
     'facebook' => [
     'client_id' => '169028993844806',
     'client_secret' => '807385b19edce9b2f64b01062015327e',
-    'redirect' => 'https://www.linchak.com/callback',
+    'redirect' => 'http://www.linchak.com/callback',
     ],
 
 ];
