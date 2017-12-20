@@ -76,7 +76,7 @@
 
                               <div class="form-group">
                                                       <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                          <div id="upload-demo" style="max-width: 250px;"></div>
+                                                          <div id="upload-demo" style="max-width: 260px;"></div>
                                                           <form enctype="multipart/form-data">
                                                           <div>
                                                             <br>
@@ -227,8 +227,8 @@ $uploadCrop = $('#upload-demo').croppie({
         type: 'circle'
     },
     boundary: {
-        width: 250,
-        height: 250
+        width: 260,
+        height: 260
     }
 });
 
