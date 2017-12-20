@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Controllers;
 use App\SocialFacebookAccount;
 use App\User;
 
