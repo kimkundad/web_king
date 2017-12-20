@@ -32,6 +32,8 @@ class SocialAccountService
 
               if($providerUser->getEmail() != NULL){
 
+                dd($providerUser);
+
                           $user = User::create([
                               'email' => $providerUser->getEmail(),
                               'name' => $providerUser->getName(),
