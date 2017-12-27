@@ -27,7 +27,7 @@ if(Auth::check()){
 
 
                         <div class="current-user text-center" style="margin-top: -5px;">
-                            <img id="LockUserPicture" src="{{asset('./assets/img/logo/calichiua-logo.png')}}" height="80px;">
+                            <img id="LockUserPicture" src="{{asset('./assets/img/logo/linchak-logo.png')}}" height="80px;">
 
                         </div>
 

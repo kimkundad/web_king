@@ -7,9 +7,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
-                    Linchak.com
-                </a>
+                <img id="LockUserPicture" class="img-responsive" src="{{asset('./assets/img/logo/linchak-logo.png')}}" height="60px;">
             </div>
 
             <ul class="nav">
