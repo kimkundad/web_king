@@ -28,7 +28,9 @@
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-12">
+                                      <a href="{{url('user_shop/'.$u->id)}}">
                                         <img src="{{url('assets/blog/'.$u->image_shop)}}" class="img-responsive">
+                                      </a>
                                     </div>
 
                                 </div>

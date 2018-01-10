@@ -193,7 +193,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group{{ $errors->has('shop_sale') ? ' has-error' : '' }}">
                                                 <label>ยอดขายรายเดือน/SALEA AMOUNT*</label>
-                                                <input type="text" class="form-control border-input" name="shop_sale" placeholder="150,000" value="{{ old( 'shop_sale') }}">
+                                                <input type="number" class="form-control border-input" name="shop_sale" placeholder="150,000" value="{{ old( 'shop_sale') }}">
                                                 @if ($errors->has('shop_sale'))
                                                     <span class="help-block">
                                                         <strong>กรุณาใส่ ยอดขายรายเดือน ของคุณด้วย</strong>
@@ -300,12 +300,12 @@ $(document).ready(function() {
 <script type="text/javascript">
       var map;
       var geocoder;
-      var mapOptions = { center: new google.maps.LatLng(0.0, 0.0), zoom: 2,
+      var mapOptions = { center: new google.maps.LatLng({{$objs->lat}}, {{$objs->lat}}), zoom: 2,
         mapTypeId: google.maps.MapTypeId.ROADMAP };
 
       function initialize() {
 var myOptions = {
-                center: new google.maps.LatLng({{ old( 'lat', 13.7211075) }}, {{ old( 'lng', 100.5904873) }} ),
+                center: new google.maps.LatLng(13.7211075, 100.5904873 ),
                 zoom: 10,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };

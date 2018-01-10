@@ -79,7 +79,7 @@
               -->
 				<li class="active-pro">
                     <a href="{{url('logout')}}">
-                        <i class="ti-export" style="font-size: 20px;"></i>
+                        <i class="ti-lock" style="font-size: 20px;"></i>
                         <p>Sign Out</p>
                     </a>
                 </li>
