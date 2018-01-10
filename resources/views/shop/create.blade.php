@@ -33,19 +33,31 @@
                                 </div>
 
 
-                              <form  method="POST" action="{{ url('') }}">
+
+                                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
+                              <form  method="POST" action="{{$url}}" enctype="multipart/form-data">
                                             {{ method_field($method) }}
                                             {{ csrf_field() }}
 
 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                                    <div class="form-group{{ $errors->has('shop_name') ? ' has-error' : '' }}">
                                                         <label>ชื่อร้าน/SHOP NAME*</label>
-                                                        <input type="text" class="form-control border-input" name="address" placeholder="Home Address" value="">
-                                                        @if ($errors->has('address'))
+                                                        <input type="text" class="form-control border-input" name="shop_name" placeholder="SHOP NAME" value="{{ old( 'shop_name') }}">
+                                                        @if ($errors->has('shop_name'))
                                                             <span class="help-block">
-                                                                <strong>กรุณาใส่ ที่อยู่ ของคุณด้วย</strong>
+                                                                <strong>กรุณาใส่ ชื่อร้าน/SHOP NAME ของคุณด้วย</strong>
                                                             </span>
                                                         @endif
                                                     </div>
@@ -55,23 +67,23 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('shop_group') ? ' has-error' : '' }}">
                                                 <label>กลุ่มสินค้า/ PRODUCT GROUP*</label>
-                                                <input type="text" class="form-control border-input" name="first_name" placeholder="First Name" value="{{ old( 'first_name', Auth::user()->first_name) }}">
-                                                @if ($errors->has('first_name'))
+                                                <input type="text" class="form-control border-input" name="shop_group" placeholder="กลุ่มสินค้า" value="{{ old( 'shop_group')}}">
+                                                @if ($errors->has('shop_group'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ ชื่อจริง ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ กลุ่มสินค้า/ PRODUCT GROUP ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('shop_type') ? ' has-error' : '' }}">
                                                 <label>ร้านค้าประเภท/SHOP TYPE*</label>
-                                                <input type="text" class="form-control border-input" name="last_name" placeholder="Last Name" value="{{ old( 'last_name', Auth::user()->last_name) }}">
-                                                @if ($errors->has('last_name'))
+                                                <input type="text" class="form-control border-input" name="shop_type" placeholder="ร้านค้าประเภท" value="{{ old( 'shop_type') }}">
+                                                @if ($errors->has('shop_type'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ นามสกุล ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ ร้านค้าประเภท ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -82,7 +94,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                                 <label>ที่อยู่/ADDRESS*</label>
-                                                <input type="text" class="form-control border-input" name="address" placeholder="Home Address" value="">
+                                                <input type="text" class="form-control border-input" name="address" placeholder="ที่อยู่" value="{{ old( 'address') }}">
                                                 @if ($errors->has('address'))
                                                     <span class="help-block">
                                                         <strong>กรุณาใส่ ที่อยู่ ของคุณด้วย</strong>
@@ -98,12 +110,12 @@
   <br>
                                     <div class="row">
                                     <div class="form-group">
-                                      <label class="col-md-3 control-label">รูปหน้าร้าน <span class="text-danger">*</span></label>
+                                      <label class="col-md-3 control-label">รูปหน้าร้าน <span class="text-danger">*</span><br> ควรใช้ขนาด กว้าง x สูง เท่ากัน<br> <span class="text-danger">(450 x 450 px)</span></label>
                                               <div class="col-md-6">
                                                 <div style="position:relative;">
 		<a class='btn btn-primary' href='javascript:;'>
 			Choose File...
-			<input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+			<input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());' required>
 		</a>
 		&nbsp;
 		<span class='label label-info' id="upload-file-info"></span>
@@ -117,20 +129,20 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                                <label>เบอร์โทรศัพ์/TELEPHONE*</label>
-                                                <input type="text" class="form-control border-input" name="first_name" placeholder="First Name" value="{{ old( 'first_name', Auth::user()->first_name) }}">
-                                                @if ($errors->has('first_name'))
+                                            <div class="form-group{{ $errors->has('shop_phone') ? ' has-error' : '' }}">
+                                                <label>เบอร์โทรศัพท์/TELEPHONE*</label>
+                                                <input type="text" class="form-control border-input" name="shop_phone" placeholder="081100775xxx.." value="{{ old( 'shop_phone') }}">
+                                                @if ($errors->has('shop_phone'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ ชื่อจริง ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ เบอร์โทรศัพท์ ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('provience_id') ? ' has-error' : '' }}">
                                                 <label>จังหวัด/ PROVIENCE*</label>
-                                                <select name="province_id" class="form-control border-input js-example-basic-single" required="">
+                                                <select name="provience_id" class="form-control border-input js-example-basic-single" required="">
                                                     <option value="">-- เลือกจังหวัด --</option>
 
 
@@ -141,9 +153,9 @@
                                                     @endif
 
                                             </select>
-                                                @if ($errors->has('last_name'))
+                                                @if ($errors->has('provience_id'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ นามสกุล ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ จังหวัด ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -159,14 +171,14 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="padding: 12px;">
-                                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('lat') ? ' has-error' : '' }}">
                                                 <label>latitude*</label>
                                                 <input type="text" class="form-control border-input" name="lat" id="lat" size="10" value="{{ old('lat') }}" required>
 
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="padding: 12px;">
-                                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('lng') ? ' has-error' : '' }}">
                                                 <label>longitude*</label>
                                                 <input type="text" class="form-control border-input" name="lng" id="lng" size="10" value="{{ old('lng') }}" required>
 
@@ -179,34 +191,34 @@
 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('shop_sale') ? ' has-error' : '' }}">
                                                 <label>ยอดขายรายเดือน/SALEA AMOUNT*</label>
-                                                <input type="text" class="form-control border-input" name="first_name" placeholder="First Name" value="{{ old( 'first_name', Auth::user()->first_name) }}">
-                                                @if ($errors->has('first_name'))
+                                                <input type="text" class="form-control border-input" name="shop_sale" placeholder="150,000" value="{{ old( 'shop_sale') }}">
+                                                @if ($errors->has('shop_sale'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ ชื่อจริง ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ ยอดขายรายเดือน ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('shop_code') ? ' has-error' : '' }}">
                                                 <label>รหัสสาขา/CHANNEL CODE*</label>
-                                                <input type="text" class="form-control border-input" name="last_name" placeholder="Last Name" value="{{ old( 'last_name', Auth::user()->last_name) }}">
-                                                @if ($errors->has('last_name'))
+                                                <input type="text" class="form-control border-input" name="shop_code" placeholder="ZX-1540000" value="{{ old( 'shop_code') }}">
+                                                @if ($errors->has('shop_code'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ นามสกุล ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ รหัสสาขา ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                                            <div class="form-group{{ $errors->has('channel') ? ' has-error' : '' }}">
                                                 <label>ช่องทางขาย/CHANNEL*</label>
-                                                <input type="text" class="form-control border-input" name="last_name" placeholder="Last Name" value="{{ old( 'last_name', Auth::user()->last_name) }}">
-                                                @if ($errors->has('last_name'))
+                                                <input type="text" class="form-control border-input" name="channel" placeholder="สื่อโฆษณาทีวี" value="{{ old( 'channel') }}">
+                                                @if ($errors->has('channel'))
                                                     <span class="help-block">
-                                                        <strong>กรุณาใส่ นามสกุล ของคุณด้วย</strong>
+                                                        <strong>กรุณาใส่ ช่องทางขาย ของคุณด้วย</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -217,9 +229,14 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div class="form-group{{ $errors->has('shop_area') ? ' has-error' : '' }}">
                                                 <label>พื้นที่/AREA</label>
-                                                <textarea rows="5" class="form-control border-input" name="bio" placeholder="Here can be your description" value="Mike">{{ old( 'bio', Auth::user()->bio) }}</textarea>
+                                                <textarea rows="5" class="form-control border-input" name="shop_area" placeholder="Here can be your Area" value="Mike">{{ old( 'shop_area') }}</textarea>
+                                                @if ($errors->has('shop_area'))
+                                                    <span class="help-block">
+                                                        <strong>กรุณาใส่ พื้นที่ ของคุณด้วย</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +249,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>รายละเอียด/Shop Detail</label>
-                                                <textarea rows="5" class="form-control border-input" name="bio" placeholder="Here can be your description" value="Mike">{{ old( 'bio', Auth::user()->bio) }}</textarea>
+                                                <textarea rows="5" class="form-control border-input" name="detail_shop" placeholder="Here can be your detail" value="Mike">{{ old( 'detail_shop') }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +305,7 @@ $(document).ready(function() {
 
       function initialize() {
 var myOptions = {
-                center: new google.maps.LatLng(13.7211075, 100.5904873 ),
+                center: new google.maps.LatLng({{ old( 'lat', 13.7211075) }}, {{ old( 'lng', 100.5904873) }} ),
                 zoom: 10,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };

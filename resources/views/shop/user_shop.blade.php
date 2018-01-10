@@ -21,13 +21,14 @@
                     </div>
 
 
-
+                    @if($objs)
+                @foreach($objs as $u)
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <img src="{{url('assets/img/shop/adidas-black_1.png')}}" class="img-responsive">
+                                        <img src="{{url('assets/blog/'.$u->image_shop)}}" class="img-responsive">
                                     </div>
 
                                 </div>
@@ -35,6 +36,9 @@
                             </div>
                         </div>
                     </div>
+
+                    @endforeach
+              @endif
 
 
                 </div>

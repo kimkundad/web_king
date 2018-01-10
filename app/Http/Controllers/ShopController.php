@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\province;
+use App\shop;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -14,6 +18,14 @@ class ShopController extends Controller
      */
     public function index()
     {
+      $shop = DB::table('shops')->select(
+            'shops.*'
+            )
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+      $data['objs'] = $shop;
       $data['header'] = "Shop";
       return view('shop.user_shop', $data);
     }
@@ -41,7 +53,56 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+      $this->validate($request, [
+       'file_source' => 'required|mimes:jpg,jpeg,png,gif|max:8048',
+       'shop_name' => 'required',
+       'shop_group' => 'required',
+       'shop_type' => 'required',
+       'address' => 'required',
+       'shop_phone' => 'required',
+       'provience_id' => 'required',
+       'lat' => 'required',
+       'lng' => 'required',
+       'shop_sale' => 'required',
+       'shop_code' => 'required',
+       'channel' => 'required',
+       'shop_area' => 'required'
+      ]);
+
+         $image = $request->file('file_source');
+
+         $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+          $img = Image::make($image->getRealPath());
+          $img->resize(500, 500, function ($constraint) {
+          $constraint->aspectRatio();
+        })->save('assets/blog/'.$input['imagename']);
+
+
+         $package = new shop;
+         $package->user_id = Auth::user()->id;
+         $package->shop_name = $request['shop_name'];
+         $package->shop_group = $request['shop_group'];
+         $package->shop_type = $request['shop_type'];
+         $package->shop_address = $request['address'];
+         $package->shop_phone = $request['shop_phone'];
+         $package->provience_id = $request['provience_id'];
+         $package->lat = $request['lat'];
+         $package->lng = $request['lng'];
+         $package->shop_sale = $request['shop_sale'];
+         $package->shop_code = $request['shop_code'];
+         $package->channel = $request['channel'];
+         $package->shop_area = $request['shop_area'];
+         $package->detail_shop = $request['detail_shop'];
+         $package->image_shop = $input['imagename'];
+         $package->save();
+
+     $the_id = $package->id;
+
+     return redirect(url('user_shop/'.$the_id.'/edit'))->with('success_shop','เพิ่มร้านค้าสำเร็จแล้วค่ะ');
+
+
     }
 
     /**
