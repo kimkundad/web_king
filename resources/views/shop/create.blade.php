@@ -300,12 +300,12 @@ $(document).ready(function() {
 <script type="text/javascript">
       var map;
       var geocoder;
-      var mapOptions = { center: new google.maps.LatLng({{$objs->lat}}, {{$objs->lat}}), zoom: 2,
+      var mapOptions = { center: new google.maps.LatLng({{ old( 'lat', 0.0) }}, {{ old( 'lng', 0.0) }}), zoom: 2,
         mapTypeId: google.maps.MapTypeId.ROADMAP };
 
       function initialize() {
 var myOptions = {
-                center: new google.maps.LatLng(13.7211075, 100.5904873 ),
+                center: new google.maps.LatLng({{ old( 'lat', 13.7211075) }}, {{ old( 'lng', 100.5904873) }} ),
                 zoom: 10,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
