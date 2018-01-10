@@ -24,6 +24,28 @@
                     </a>
                 </li>
 
+
+                <li {{ (Request::is('user_shop*') ? 'class=active' : '') }}>
+                    <a href="{{url('user_shop')}}">
+                        <i class="ti-briefcase"></i>
+                        <p>User Shop</p>
+                    </a>
+                </li>
+
+                <li {{ (Request::is('category*') ? 'class=active' : '') }}>
+                    <a href="{{url('category')}}">
+                        <i class="ti-direction-alt"></i>
+                        <p>Category</p>
+                    </a>
+                </li>
+
+                <li {{ (Request::is('category*') ? 'class=active' : '') }}>
+                    <a href="{{url('category')}}">
+                        <i class="ti-palette"></i>
+                        <p>Product</p>
+                    </a>
+                </li>
+
           <!--      <li>
                     <a href="table.html">
                         <i class="ti-view-list-alt"></i>

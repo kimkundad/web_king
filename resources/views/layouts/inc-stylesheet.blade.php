@@ -6,6 +6,7 @@
 
   <!--  Paper Dashboard core CSS    -->
   <link href="{{asset('./assets/css/paper-dashboard.css')}}" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{asset('./assets/select2/css/select2.css')}}" />
 
 
   <!--  CSS for Demo Purpose, don't include it in your project     -->
