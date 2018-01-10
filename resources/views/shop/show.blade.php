@@ -219,8 +219,8 @@ h5, .h5 {
                     <div class=" col-lg-8 col-md-7">
                       <div class="card">
                           <div class="header">
-                              <h4 class="title">Striped Table</h4>
-                              <p class="category">Here is a subtitle for this table</p>
+                              <h4 class="title">สินค้าของ {{$objs->shop_name}}</h4>
+                              <p class="category">คุณสามารถบริหารจัดการสินค้าของ <span>{{$objs->shop_name}}</span></p>
                           </div>
                           <div class="content table-responsive table-full-width">
                               <table class="table table-striped">
