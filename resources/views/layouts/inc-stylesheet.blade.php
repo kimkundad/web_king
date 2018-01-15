@@ -17,3 +17,11 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
   <link href="{{asset('./assets/css/themify-icons.css')}}" rel="stylesheet">
+
+  <style>
+  .table > thead > tr > th {
+      border-bottom-width: 0;
+      font-size: 1.15em;
+      font-weight: 300;
+  }
+  </style>

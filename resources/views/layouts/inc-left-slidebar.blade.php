@@ -39,8 +39,8 @@
                     </a>
                 </li>
 
-                <li {{ (Request::is('11111*') ? 'class=active' : '') }}>
-                    <a href="{{url('11111')}}">
+                <li {{ (Request::is('product*') ? 'class=active' : '') }}>
+                    <a href="{{url('product')}}">
                         <i class="ti-palette"></i>
                         <p>Product</p>
                     </a>

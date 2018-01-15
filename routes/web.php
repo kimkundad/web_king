@@ -38,5 +38,5 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('update_pic', 'ProfileController@update_pic');
   Route::resource('user_shop', 'ShopController');
   Route::resource('category', 'CategoryController');
-
+  Route::resource('product', 'ProductController');
   });
