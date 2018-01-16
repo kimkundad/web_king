@@ -49,6 +49,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+      $this->validate($request, [
+       'cat_name' => 'required'
+      ]);
+
+
       $package = new category();
       $package->user_id = Auth::user()->id;
       $package->cat_name = $request['cat_name'];

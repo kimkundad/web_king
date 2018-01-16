@@ -27,7 +27,7 @@
 
                           <div class="content table-responsive table-full-width">
 
-                            <a class="btn btn-default " href="{{url('category/create')}}" role="button" style="margin-left:12px;">
+                            <a class="btn btn-default " href="{{url('product/create')}}" role="button" style="margin-left:12px;">
                             <i class="fa fa-plus"></i> เพิ่มสินค้าใหม่</a>
 
                               <table class="table table-striped">
@@ -53,11 +53,14 @@
                                         <td>{{$u->created_at}}</td>
                                         <td>
 
-                                          <input type="checkbox" name="my-checkbox" id="switch-size" data-size="mini" checked="checked">
+                                          <input type="checkbox" name="my-checkbox" id="switch-size" data-size="mini"
+                         @if($u->product_status == 1)
+                          checked="checked"
+                          @endif>
                                         </td>
                                         <td>
 
-                                          <a style="float:left; margin-right:5px;" title="แก้ไขหมวดหมู่" class="btn btn-primary btn-xs" href="{{url('category/'.$u->category_id.'/edit')}}" role="button"><i class="fa fa-cog "></i> </a>
+                                          <a style="float:left; margin-right:5px;" title="แก้ไขหมวดหมู่" class="btn btn-primary btn-xs" href="{{url('product/'.$u->id.'/edit')}}" role="button"><i class="fa fa-cog "></i> </a>
 
                                           <form  action="" method="post" onsubmit="return(confirm('Do you want Delete'))">
                                             <input type="hidden" name="_method" value="DELETE">
