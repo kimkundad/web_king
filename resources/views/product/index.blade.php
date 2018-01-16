@@ -133,7 +133,7 @@ $.notify({
 </script>
 @endif
 
-@if ($message = Session::get('add_success'))
+@if ($message = Session::get('success_product'))
 <script type="text/javascript">
 type = ['success'];
 color = Math.floor((Math.random() * 4) + 1);
