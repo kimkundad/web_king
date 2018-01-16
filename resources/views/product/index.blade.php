@@ -1,5 +1,9 @@
 @extends('layouts.template')
 @section('stylesheet')
+  <link rel="stylesheet" href="{{asset('./assets/bootstrap-switch-master/css/bootstrap3/bootstrap-switch.css')}}" />
+<style>
+
+</style>
 @stop('stylesheet')
 
 @section('content')
@@ -12,7 +16,7 @@
                   <div class="col-md-12">
                       <div class="card">
                           <div class="header">
-                            
+
                               <p class="category">คุณสามารถเพิ่มสินค้า และสามารถซ่อมจากการแชร์ข้อมูลสินค้าได้</p>
                           </div>
 
@@ -30,13 +34,41 @@
                                 <thead>
                                   <tr>
                                     <th>ID</th>
-                                    <th>ชื่อหมวดหมู่</th>
-                                    <th>จำนวนสินค้า</th>
-                                    <th>วันที่ส้ราง</th>
+                                    <th>ชื่อสินค้า</th>
+                                    <th>หมวดหมู่</th>
+                                    <th>คงเหลือ</th>
+                                    <th>สถานะ</th>
                                     <th>จัดการ</th>
                                   </tr>
                                 </thead>
                                   <tbody>
+
+
+              @if($objs)
+                @foreach($objs as $u)
+                                      <tr>
+                                        <td>{{$u->product_code}}</td>
+                                        <td>{{$u->cat_name}}</td>
+                                        <td>36,738</td>
+                                        <td>{{$u->created_at}}</td>
+                                        <td>
+
+                                          <input type="checkbox" name="my-checkbox" id="switch-size" data-size="mini" checked="checked">
+                                        </td>
+                                        <td>
+
+                                          <a style="float:left; margin-right:5px;" title="แก้ไขหมวดหมู่" class="btn btn-primary btn-xs" href="{{url('category/'.$u->category_id.'/edit')}}" role="button"><i class="fa fa-cog "></i> </a>
+
+                                          <form  action="" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" title="ลบหมวดหมู่" class="btn btn-danger btn-xs"><i class="fa fa-times "></i></button>
+                                          </form>
+
+                                          </td>
+                                      </tr>
+                @endforeach
+              @endif
 
                                   </tbody>
                               </table>
@@ -69,6 +101,12 @@
 
 @section('scripts')
 <script src="{{url('assets/js/bootstrap-notify.js')}}"></script>
+<script src="{{asset('/assets/vendor/ios7-switch/ios7-switch.js')}}"></script>
+<script src="{{asset('/assets/bootstrap-switch-master/js/bootstrap-switch.js')}}"></script>
+<script>
+$("[name='my-checkbox']").bootstrapSwitch();
+</script>
+
 
 @if ($message = Session::get('edit_success'))
 <script type="text/javascript">

@@ -21,7 +21,7 @@
   <style>
   .table > thead > tr > th {
       border-bottom-width: 0;
-      font-size: 1.15em;
+      font-size: 1.05em;
       font-weight: 300;
   }
   </style>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -15,6 +16,16 @@ class ProductController extends Controller
      */
     public function index()
     {
+      $shop = DB::table('products')->select(
+            'products.*',
+            'categories.*'
+            )
+            ->leftjoin('categories','categories.category_id', 'products.cat_id')
+            ->where('products.user_id', Auth::user()->id)
+            ->orderBy('products.id', 'desc')
+            ->get();
+
+      $data['objs'] = $shop;
       $data['header'] = "สินค้าทั้งหมด";
       return view('product.index', $data);
     }
