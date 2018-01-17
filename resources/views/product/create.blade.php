@@ -96,6 +96,25 @@ img {
                                                   </div>
 
 
+                                                  <div class="form-group{{ $errors->has('shop_name') ? ' has-error' : '' }}">
+                                                      <label>เลือกร้านค้า*</label>
+                                                      <select name="shop_name" class="form-control border-input" required>
+
+                    								                      <option value="">-- เลือกร้านค้า --</option>
+                                                          @if($shop_id)
+                    								                      @foreach($shop_id as $shop)
+                    													  <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
+                    													  @endforeach
+                                                @endif
+                    								                    </select>
+                                                      @if ($errors->has('shop_name'))
+                                                          <span class="help-block">
+                                                              <strong>กรุณา เลือกร้านค้า ของคุณด้วย</strong>
+                                                          </span>
+                                                      @endif
+                                                  </div>
+
+
                                                   <div class="form-group{{ $errors->has('product_cat') ? ' has-error' : '' }}">
                                                       <label>หมวดหมู่ สินค้า*</label>
                                                       <select name="product_cat" class="form-control border-input" required>

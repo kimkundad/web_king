@@ -126,6 +126,27 @@ img {
                                                       @endif
                                                   </div>
 
+
+                                                  <div class="form-group{{ $errors->has('shop_name') ? ' has-error' : '' }}">
+                                                      <label>เลือกร้านค้า*</label>
+                                                      <select name="shop_name" class="form-control border-input" required>
+
+                    								                      <option value="">-- เลือกหมวดหมู่ --</option>
+                                                          @if($shop_id)
+                    								                      @foreach($shop_id as $shop)
+                    													  <option value="{{$shop->id}}" @if( $objs->shop_id == $shop->id)
+                              selected='selected'
+                              @endif>{{$shop->shop_name}}</option>
+                    													  @endforeach
+                                                @endif
+                    								                    </select>
+                                                      @if ($errors->has('shop_name'))
+                                                          <span class="help-block">
+                                                              <strong>กรุณา เลือกร้านค้า ของคุณด้วย</strong>
+                                                          </span>
+                                                      @endif
+                                                  </div>
+
                                                   <div class="form-group{{ $errors->has('product_sum') ? ' has-error' : '' }}">
                                                       <label>จำนวนสินค้า*</label>
                                                       <input type="number" class="form-control border-input" name="product_sum" value="{{$objs->product_sum}}">
@@ -210,6 +231,10 @@ img {
 @stop
 
 @section('scripts')
+
+<script src="{{url('assets/js/bootstrap-notify.js')}}"></script>
+
+
 <script>
         $(document).ready(function () {
             $("#fileAvatar").on("change", previewFile);
@@ -234,4 +259,44 @@ img {
             }
         }
     </script>
+
+    @if ($message = Session::get('success_edit_product'))
+    <script type="text/javascript">
+    type = ['success'];
+    color = Math.floor((Math.random() * 4) + 1);
+    $.notify({
+        icon: "ti-gift",
+        message: "ยินดีด้วย ได้ทำการแก้ไขข้อมูล สำเร็จเรียบร้อยแล้วค่ะ"
+
+      },{
+          type: type[color],
+          timer: 2000,
+          placement: {
+              from: 'top',
+              align: 'right'
+          }
+      });
+    </script>
+    @endif
+
+    @if ($message = Session::get('success_product'))
+    <script type="text/javascript">
+    type = ['success'];
+    color = Math.floor((Math.random() * 4) + 1);
+    $.notify({
+        icon: "ti-gift",
+        message: "ยินดีด้วย ได้ทำการเพิ่มข้อมูล สำเร็จเรียบร้อยแล้วค่ะ"
+
+      },{
+          type: type[color],
+          timer: 2000,
+          placement: {
+              from: 'top',
+              align: 'right'
+          }
+      });
+    </script>
+    @endif
+
+
 @stop('scripts')

@@ -7,7 +7,10 @@
   * @license Apache-2.0
   */
 
+
+
 (function (global, factory) {
+  
   if (typeof define === "function" && define.amd) {
     define(['jquery'], factory);
   } else if (typeof exports !== "undefined") {

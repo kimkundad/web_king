@@ -49,6 +49,15 @@ class ProductController extends Controller
 
       $data['objs'] = $shop;
 
+      $shop_id = DB::table('shops')->select(
+            'shops.*'
+            )
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+      $data['shop_id'] = $shop_id;
+
 
       $data['method'] = "post";
       $data['url'] = url('product');
@@ -70,7 +79,8 @@ class ProductController extends Controller
        'product_code' => 'required',
        'product_cat' => 'required',
        'product_sum' => 'required',
-       'product_detail' => 'required'
+       'product_detail' => 'required',
+       'shop_name' => 'required'
       ]);
 
       $image = $request->file('image');
@@ -91,6 +101,7 @@ class ProductController extends Controller
      $package->product_sum = $request['product_sum'];
      $package->product_image = $input['imagename'];
      $package->product_status = 0;
+     $package->shop_id = $request['shop_name'];
      $package->save();
 
  $the_id = $package->id;
@@ -123,8 +134,10 @@ class ProductController extends Controller
 
         $shop = DB::table('products')->select(
               'products.*',
-              'categories.*'
+              'categories.*',
+              'shops.*'
               )
+              ->leftjoin('shops','shops.id', 'products.shop_id')
               ->leftjoin('categories','categories.category_id', 'products.cat_id')
               ->where('products.user_id', Auth::user()->id)
               ->where('products.id', $id)
@@ -143,8 +156,18 @@ class ProductController extends Controller
 
         $data['cat'] = $cat;
 
+
+        $shop_id = DB::table('shops')->select(
+              'shops.*'
+              )
+              ->where('user_id', Auth::user()->id)
+              ->orderBy('id', 'desc')
+              ->get();
+
+        $data['shop_id'] = $shop_id;
+
         $data['header'] = 'แก้ไข '.$shop->product_name;
-        $data['url'] = url('user_shop/'.$id);
+        $data['url'] = url('product/'.$id);
         $data['method'] = "put";
         return view('product.edit',$data);
     }
@@ -158,7 +181,103 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+      $image = $request->file('image');
+
+      if($image != NULL){
+
+
+        $this->validate($request, [
+         'image' => 'required|mimes:jpg,jpeg,png,gif|max:8048',
+         'product_name' => 'required',
+         'product_code' => 'required',
+         'product_cat' => 'required',
+         'product_sum' => 'required',
+         'product_detail' => 'required',
+         'shop_name' => 'required'
+        ]);
+
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+         $img = Image::make($image->getRealPath());
+         $img->resize(500, 500, function ($constraint) {
+         $constraint->aspectRatio();
+       })->save('assets/product/'.$input['imagename']);
+
+
+
+       $package = product::find($id);
+       $package->user_id = Auth::user()->id;
+       $package->cat_id = $request['product_cat'];
+       $package->product_name = $request['product_name'];
+       $package->product_detail = $request['product_detail'];
+       $package->product_code = $request['product_code'];
+       $package->product_sum = $request['product_sum'];
+       $package->product_image = $input['imagename'];
+       $package->shop_id = $request['shop_name'];
+       $package->save();
+
+       $the_id = $request['id'];
+
+
+      }else{
+
+
+
+        $this->validate($request, [
+         'product_name' => 'required',
+         'product_code' => 'required',
+         'product_cat' => 'required',
+         'product_sum' => 'required',
+         'product_detail' => 'required',
+         'shop_name' => 'required'
+        ]);
+
+
+       $package = product::find($id);
+       $package->user_id = Auth::user()->id;
+       $package->cat_id = $request['product_cat'];
+       $package->product_name = $request['product_name'];
+       $package->product_detail = $request['product_detail'];
+       $package->product_code = $request['product_code'];
+       $package->product_sum = $request['product_sum'];
+       $package->shop_id = $request['shop_name'];
+       $package->save();
+
+       $the_id = $request['id'];
+
+      }
+
+
+
+
+     return redirect(url('product/'.$id.'/edit'))->with('success_edit_product','เพิ่มร้านค้าสำเร็จแล้วค่ะ');
+
+
+
+
+    }
+
+
+
+    public function post_status(Request $request){
+
+
+      $user = product::findOrFail($request->product_id);
+
+              if($user->product_status == 1){
+                  $user->product_status = 0;
+              } else {
+                  $user->product_status = 1;
+              }
+
+
+      return response()->json([
+      'data' => [
+        'success' => $user->save(),
+      ]
+    ]);
+
+
     }
 
     /**

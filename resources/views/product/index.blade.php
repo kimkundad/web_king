@@ -46,17 +46,18 @@
 
               @if($objs)
                 @foreach($objs as $u)
-                                      <tr>
+                                      <tr id="{{$u->id}}">
                                         <td>{{$u->product_code}}</td>
+                                        <td>{{$u->product_name}}</td>
                                         <td>{{$u->cat_name}}</td>
-                                        <td>36,738</td>
-                                        <td>{{$u->created_at}}</td>
+                                        <td>{{$u->product_sum}}</td>
                                         <td>
 
                                           <input type="checkbox" name="my-checkbox" id="switch-size" data-size="mini"
                          @if($u->product_status == 1)
                           checked="checked"
-                          @endif>
+                          @endif
+                          />
                                         </td>
                                         <td>
 
@@ -107,10 +108,49 @@
 
 @section('scripts')
 <script src="{{url('assets/js/bootstrap-notify.js')}}"></script>
-<script src="{{asset('/assets/vendor/ios7-switch/ios7-switch.js')}}"></script>
 <script src="{{asset('/assets/bootstrap-switch-master/js/bootstrap-switch.js')}}"></script>
-<script>
-$("[name='my-checkbox']").bootstrapSwitch();
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("[name='my-checkbox']").bootstrapSwitch();
+//  $("input:checkbox").change(function() {
+
+$("[name='my-checkbox']").on('switchChange.bootstrapSwitch',function(){
+    var product_id = $(this).closest('tr').attr('id');
+
+    $.ajax({
+            type:'POST',
+            url:'{{url('api/post_status')}}',
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            data: { "product_id" : product_id },
+            success: function(data){
+              if(data.data.success){
+
+
+                type = ['success'];
+                color = Math.floor((Math.random() * 4) + 1);
+                $.notify({
+                    icon: "ti-gift",
+                    message: "ยินดีด้วย ได้ทำการแก้ไขข้อมูล สำเร็จเรียบร้อยแล้วค่ะ"
+
+                  },{
+                      type: type[color],
+                      timer: 2000,
+                      placement: {
+                          from: 'top',
+                          align: 'right'
+                      }
+                  });
+
+
+
+              }
+            }
+        });
+    });
+});
 </script>
 
 

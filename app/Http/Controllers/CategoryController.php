@@ -23,6 +23,12 @@ class CategoryController extends Controller
             ->orderBy('category_id', 'asc')
             ->get();
 
+            foreach ($shop as $obj) {
+
+                $options = DB::table('products')->where('cat_id',$obj->category_id)->count();
+                $obj->options = $options;
+            }
+
       $data['objs'] = $shop;
       $data['header'] = "หมวดหมู่สินค้า";
       return view('category.index', $data);

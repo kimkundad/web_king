@@ -21,7 +21,6 @@ Route::get('/', function () {
     return view('auth.login');
   }
 
-
 });
 
 Auth::routes();
@@ -39,4 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('user_shop', 'ShopController');
   Route::resource('category', 'CategoryController');
   Route::resource('product', 'ProductController');
+
+  Route::post('api/post_status', 'ProductController@post_status');
+
+
   });

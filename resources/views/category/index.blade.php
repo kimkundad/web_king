@@ -34,7 +34,7 @@
                                   <tr>
                                     <th>ID</th>
                                     <th>ชื่อหมวดหมู่</th>
-                                    <th>จำนวนสินค้า</th>
+                                    <th>จำนวนชนิดสินค้า</th>
                                     <th>วันที่ส้ราง</th>
                                     <th>จัดการ</th>
                                   </tr>
@@ -45,7 +45,7 @@
                                       <tr>
                                         <td>{{$u->category_id}}</td>
                                         <td>{{$u->cat_name}}</td>
-                                        <td>36,738</td>
+                                        <td>{{$u->options}}</td>
                                         <td>{{$u->created_at}}</td>
                                         <td>
 
